@@ -2832,7 +2832,7 @@ router.get('/game/tebakgambar', async (req, res, next) => {
 }
 })
 
-router.get('/maker/special/transformer', async (req, res, next) => {
+router.get('/maker/spesial/transformer', async (req, res, next) => {
         var apikey = req.query.apikey,
             text = req.query.text
             
@@ -2841,12 +2841,12 @@ router.get('/maker/special/transformer', async (req, res, next) => {
     if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})
        fetch(encodeURI(`https://textmaker-api-zahirr.herokuapp.com/api/special/transformer?text=${text}`))
         .then(response => response.json())
-        .then(data => {
-        var result = data;
-             res.json({
-             	author: 'Akira',
-                 result
-             })
+        .then(async data => {
+                  let result = data;
+                  let buffer = await fetch(data.url)
+                  res.type('png')
+                  res.send(await buffer.buffer())
+              })
          })
          .catch(e => {
          	console.log(e);
