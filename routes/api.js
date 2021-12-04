@@ -1848,7 +1848,7 @@ try {
   var hasil = await getBuffer(`https://api.zeks.xyz/api/logobp?text=${text}&apikey=apivinz`)
        await fs.writeFileSync(__path + '/tmp/bp.png', hasil)
          res.sendFile(__path + '/tmp/bp.png')
-         })
+         }
 } catch (e) {
          	console.log(e);
          	res.sendFile(__path + '/docs/503.html')
