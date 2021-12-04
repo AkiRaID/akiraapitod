@@ -2832,6 +2832,28 @@ router.get('/game/tebakgambar', async (req, res, next) => {
 }
 })
 
+router.get('/maker/special/transformer', async (req, res, next) => {
+        var apikey = req.query.apikey,
+            text = req.query.text
+            
+	if(!apikey) return res.json(loghandler.notparam)
+	if(listkey.includes(apikey)){
+    if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})
+
+       fetch(encodeURI(`https://textmaker-api-zahirr.herokuapp.com/api/special/transformer?text=${text}`))
+        .then(response => response.json())
+        .then(data => {
+        var result = data;
+             res.json({
+             	author: 'Akira',
+                 result
+             })
+         })
+         .catch(e => {
+         	res.json(loghandler.error)
+})
+})
+
 // other
 router.get('/other/ghstalk', async (req, res, next) => {
           var apikey = req.query.apikey
