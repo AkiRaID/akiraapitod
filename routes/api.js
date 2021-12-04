@@ -2832,21 +2832,21 @@ router.get('/game/tebakgambar', async (req, res, next) => {
 }
 })
 
-router.get('/maker/spesial/transformer', async (req, res, next) => {
+router.get('/sfw/neko', async (req, res, next) => {
         var apikey = req.query.apikey,
             text = req.query.text
             
 	if(!apikey) res.sendFile(__path + '/docs/403.html')
 	if(listkey.includes(apikey)){
     if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})
-       fetch(encodeURI(`https://textmaker-api-zahirr.herokuapp.com/api/special/transformer?text=${text}`))
-        .then(response => response.json())
-        .then(async data => {
-                  let result = data;
-                  let buffer = await fetch(data.url)
-                  res.type('png')
-                  res.send(await buffer.buffer())
-              })
+       fetch(encodeURI(`https://waifu.pics/api/sfw/neko`))
+           .then(response => response.json())
+           .then(async data => {
+                let result = data;
+                let buffer = await fetch(data.url)
+                res.type('png')
+                res.send(await buffer.buffer())
+            })
          })
          .catch(e => {
          	console.log(e);
