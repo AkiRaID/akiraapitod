@@ -2836,10 +2836,9 @@ router.get('/maker/special/transformer', async (req, res, next) => {
         var apikey = req.query.apikey,
             text = req.query.text
             
-	if(!apikey) return res.json(loghandler.notparam)
+	if(!apikey) res.sendFile(__path + '/docs/403.html')
 	if(listkey.includes(apikey)){
     if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})
-
        fetch(encodeURI(`https://textmaker-api-zahirr.herokuapp.com/api/special/transformer?text=${text}`))
         .then(response => response.json())
         .then(data => {
@@ -2850,8 +2849,12 @@ router.get('/maker/special/transformer', async (req, res, next) => {
              })
          })
          .catch(e => {
-         	res.json(loghandler.error)
+         	console.log(e);
+         	res.sendFile(__path + '/docs/503.html')
 })
+} else {
+  res.sendFile(__path + '/docs/403.html')
+}
 })
 
 // other
