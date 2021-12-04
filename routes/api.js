@@ -1838,25 +1838,6 @@ router.get('/photooxy/shadow_text', async (req, res, next) => {
 }
 })
 
-router.get('/spesial/blackpink', async (req, res, next) => {
-        var apikey = req.query.apikey,
-	    var text = req.query.text;
-try {
-  if(!apikey) return res.sendFile(__path + '/docs/403.html')
-       if (!text) return res.json({ status : false, creator : `${creator}`, message : "masukan parameter text"})      
-         if(listkey.includes(apikey)){
-  var hasil = await getBuffer(`https://api.zeks.xyz/api/logobp?text=${text}&apikey=apivinz`)
-       await fs.writeFileSync(__path + '/tmp/bp.png', hasil)
-         res.sendFile(__path + '/tmp/bp.png')
-         }
-} catch (e) {
-         	console.log(e);
-         	res.sendFile(__path + '/docs/503.html')
-}
-} else {
-  res.sendFile(__path + '/docs/403.html')
-}
-})
 // search api
 router.get('/search/joox', async (req, res, next) => {
           var apikey = req.query.apikey
